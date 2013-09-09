@@ -1,0 +1,299 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>かりきゅれ～た～</title>
+
+<script type="text/javascript">
+<!--
+
+// 夜２５時のテンションで作ったらダメですorz
+
+var FLAG_OVERFLOW = 1;
+var ARITHMETIC_NON = 0;
+var ARITHMETIC_ADD = 1;
+var ARITHMETIC_SUB = 2;
+var ARITHMETIC_MUL = 3;
+var ARITHMETIC_DIV = 4;
+
+var result = 0;
+var display = "0";
+var flag = 0;
+var arithmetic = ARITHMETIC_NON;
+var clearNext = 0;
+
+// 計算けっｋのクリア処理
+function clearAll() {
+    result = 0;
+    display = "0";
+    flag = 0;
+    clearNext = 0;
+    arithmetic = ARITHMETIC_NON;
+
+    refreshDisplay();
+}
+
+// １文字追加
+function addNumeric(strNum)
+{
+    if (flag != 0) {
+        return;
+    }
+
+    if (clearNext != 0) {
+        display = "";
+        clearNext = 0;
+    }
+
+    if (display.length >= 11) {
+        flag = FLAG_OVERFLOW;
+    }
+
+    if (strNum == ".") {
+
+        if (display.indexOf(".", 0) >= 0) {
+            return;
+        }
+        else if (display == "") {
+            display = "0.";
+        }
+        else {
+            display = display + strNum;
+        }
+
+    }
+    else {
+        if (display != "0")
+            display = display + strNum;
+        else
+            display = strNum;
+    }
+
+    refreshDisplay();
+}
+
+// 画面更新
+function refreshDisplay() {
+
+    var object = document.getElementById("answer");
+    var ari = document.getElementById("arithmetic");
+
+    switch (flag) {
+        case FLAG_OVERFLOW:
+            object.innerText = "Error!";
+            break;
+
+        default:
+            object.innerText = display;
+            break;
+    }
+
+    switch (arithmetic) {
+        case ARITHMETIC_ADD:
+            ari.innerText = "＋";
+            break;
+        case ARITHMETIC_SUB:
+            ari.innerText = "－";
+            break;
+        case ARITHMETIC_MUL:
+            ari.innerText = "×";
+            break;
+        case ARITHMETIC_DIV:
+            ari.innerText = "÷";
+            break;
+        default:
+            ari.innerText = "";
+            break;
+    }
+
+}
+
+// 計算
+function calcAnswer() {
+    if (flag != 0) {
+        return;
+    }
+
+    var right = Number(display);
+    if (right == NaN) {
+        flag = FLAG_OVERFLOW;
+        refreshDisplay();
+        return;
+    }
+
+    switch (arithmetic) {
+        case ARITHMETIC_ADD:
+            answer = answer + right;
+            break;
+        case ARITHMETIC_SUB:
+            answer = answer - right;
+            break;
+        case ARITHMETIC_MUL:
+            answer = answer * right;
+            break;
+        case ARITHMETIC_DIV:
+            answer = answer / right;
+            break;
+        default:
+            answer = right;
+            break;
+    }
+
+    display = answer.toString(10);
+    if (display.length > 10) {
+        display = display.substr(0, 10);
+    }
+
+    flag = 0;
+    arithmetic = ARITHMETIC_NON;
+    clearNext = 1;
+
+    refreshDisplay();
+
+}
+
+// +
+function setAdd() {
+    if (arithmetic != ARITHMETIC_NON) {
+        calcAnswer();
+    } else {
+        answer = Number(display);
+    }
+
+    clearNext = 1;
+    arithmetic = ARITHMETIC_ADD;
+    refreshDisplay();
+}
+
+// -
+function setSub() {
+    if (arithmetic != ARITHMETIC_NON) {
+        calcAnswer();
+    } else {
+        answer = Number(display);
+    }
+
+    clearNext = 1;
+    arithmetic = ARITHMETIC_SUB;
+    refreshDisplay();
+}
+
+// *
+function setMul() {
+    if (arithmetic != ARITHMETIC_NON) {
+        calcAnswer();
+    } else {
+        answer = Number(display);
+    }
+
+    clearNext = 1;
+    arithmetic = ARITHMETIC_MUL;
+    refreshDisplay();
+}
+
+// /
+function setDiv() {
+    if (arithmetic != ARITHMETIC_NON) {
+        calcAnswer();
+    } else {
+        answer = Number(display);
+    }
+
+    clearNext = 1;
+    arithmetic = ARITHMETIC_DIV;
+    refreshDisplay();
+}
+
+// ウィンドウのロードが終了したら初期化しておく
+window.onload = function () {
+    clearAll();
+    refreshDisplay();
+}
+
+//--></script>
+
+<style type="text/css">
+<!--
+
+    input.calc2Basic {
+	border: 2px solid #101629;
+	color: #314D53;
+	background-color: #ACBFD2;
+	font-weight: bold;
+	width: 100%;
+	padding: 4px;
+}
+
+    td.buttonNormal {
+        width: 40px;
+    }
+    td.buttonWide {
+        width: 82px;
+    }
+
+    div.answerCell {
+	border-top: 2px solid #102918;
+	border-bottom: 2px solid #102918;
+	border-left: 6px solid #102918;
+	border-right: 6px solid #102918;
+	background-color: #ACBFD2;
+	text-align: right;
+	padding-right: 12px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	padding-left: 12px;
+	font-weight: bold;
+	color: #314D53;
+}
+
+    div.arithmetic {
+        float: left;
+    }
+    div.answer {
+        float: right;
+    }
+
+
+--></style>
+
+</head>
+
+<body>
+
+    <table>
+        <tr>
+            <td rowspan="5"><br /></td>
+            <td colspan="5"><div id="answerCell" class="answerCell"><div id="arithmetic" class="arithmetic"></div><div id="answer" class="answer">0</div><div style="clear:both; height:0px;"></div></div></td>
+            <td rowspan="5"><br /></td>
+        </tr>
+        <tr>
+            <td class="buttonNormal"><input type="button" value="７" class="calc2Basic" onclick="addNumeric('7');" /></td>
+            <td class="buttonNormal"><input type="button" value="８" class="calc2Basic" onclick="addNumeric('8');" /></td>
+            <td class="buttonNormal"><input type="button" value="９" class="calc2Basic" onclick="addNumeric('9');" /></td>
+            <td colspan="2"><input type="button" value="Ｃ" class="calc2Basic" onclick="clearAll();" /></td>
+        </tr>
+        <tr>
+            <td class="buttonNormal"><input type="button" value="４" class="calc2Basic" onclick="addNumeric('4');" /></td>
+            <td class="buttonNormal"><input type="button" value="５" class="calc2Basic" onclick="addNumeric('5');" /></td>
+            <td class="buttonNormal"><input type="button" value="６" class="calc2Basic" onclick="addNumeric('6');" /></td>
+            <td class="buttonNormal"><input type="button" value="＋" class="calc2Basic" onclick="setAdd();" /></td>
+            <td class="buttonNormal"><input type="button" value="－" class="calc2Basic" onclick="setSub();" /></td>
+        </tr>
+        <tr>
+            <td class="buttonNormal"><input type="button" value="１" class="calc2Basic" onclick="addNumeric('1');" /></td>
+            <td class="buttonNormal"><input type="button" value="２" class="calc2Basic" onclick="addNumeric('2');" /></td>
+            <td class="buttonNormal"><input type="button" value="３" class="calc2Basic" onclick="addNumeric('3');" /></td>
+            <td class="buttonNormal"><input type="button" value="×" class="calc2Basic" onclick="setMul();" /></td>
+            <td class="buttonNormal"><input type="button" value="÷" class="calc2Basic" onclick="setDiv();" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="button" value="０" class="calc2Basic" onclick="addNumeric('0');" /></td>
+            <td class="buttonNormal"><input type="button" value="．" class="calc2Basic" onclick="addNumeric('.');" /></td>
+            <td colspan="2"><input type="button" value="＝" class="calc2Basic" onclick="calcAnswer();" /></td>
+        </tr>
+    </table>
+
+</body>
+
+</html>

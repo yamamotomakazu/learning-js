@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+  <title>jQUery UI 13 (今度こそ)</title>
+  <link href="css/ui-lightness/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+  <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
+</head>
+
+<body>
+
+  <input type="text" id="langs" />
+ 
+  <script type="text/javascript">
+  
+  $(function() {
+    // 入力補助（補完）
+    var langs = ["ja","en","cn","fr","sp","山田","山口","山辺","山岸"];
+    
+    $('#langs').autocomplete({
+      source: langs
+    });
+  });
+  
+  </script>
+</body>
+
+</html>

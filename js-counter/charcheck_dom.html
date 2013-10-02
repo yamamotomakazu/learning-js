@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+  <title>文字数チェッカー</title>
+  <style type="text/css">
+<!--
+
+#memo {
+  width: 500px;
+  height:150px;
+}
+
+.warning {
+  color: red;
+  font-weight: bold;
+}
+
+--></style>
+</head>
+
+<body>
+
+  <h1>のこりもじすうはどうなってんの？</h1>
+  <textarea id="memo"></textarea>
+
+  <div id="count"></div>
+  
+  <script type="text/javascript">
+<!--
+
+(function(){
+
+  var LIMIT = 40;
+  var WARNING = 12;
+  
+  var memo = document.getElementById('memo');
+  var count = document.getElementById('count');
+  
+  count.innerHTML = LIMIT;
+  
+  function countChars(textarea) {
+    
+    // 残り許容数を取得
+    var remaining = LIMIT - textarea.value.length;
+    count.innerHTML = remaining;
+    
+    // 警告のしきい値以下になったら強調（クラス変更）
+    if( remaining <= WARNING ) {
+      count.className = 'warning';
+    }
+    else {
+      count.className = '';
+    }
+  }
+  
+  // イベントの追加（IE8以下では付け方が違うので注意）
+  if( memo.attachEvent ) { // IE8が持つメソッドかどうかチェック
+    memo.attachEvent('onkeyup', function(e){
+      countChars(e.srcElement);
+    });
+  }
+  else {
+    memo.addEventListener('keyup', function() {
+      countChars(this);
+    });
+  }
+
+})();
+
+//--></script>
+
+</body>
+
+</html>

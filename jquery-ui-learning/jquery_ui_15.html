@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+  <title>jQUery UI 15 (今度こそ)</title>
+  <link href="css/ui-lightness/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+  <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
+</head>
+
+<body>
+  
+  <input type="text" id="datepicker" />
+  
+  <script type="text/javascript">
+  
+  $(function() {
+    // 日付選択！
+    $('#datepicker').datepicker({
+      dateFormat: 'yy-mm-dd',
+      numberOfMonths: 3,
+      minDate: -2,
+      maxDate: '+1M'
+    });    
+  });
+  
+  </script>
+</body>
+
+</html>

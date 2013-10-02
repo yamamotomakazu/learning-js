@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+  <title>jQUery UI 11 (今度こそ)</title>
+  <link href="css/ui-lightness/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+  <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
+  <style type="text/css">
+.ui-selected {
+  background:#FF0000;
+}
+  </style>
+</head>
+
+<body>
+
+  <ul id="sortable">
+    <li id="item_1">item1</li>
+    <li id="item_2">item2</li>
+    <li id="item_3">item3</li>
+    <li id="item_4">item4</li>
+    <li id="item_5">item5</li>
+  </ul>
+  
+  <script type="text/javascript">
+  
+  $(function() {
+    // sortしちゃうぞ（任意に入れ替える）
+    $('#sortable').sortable({
+      cursor: 'move',
+      opacity: 0.5,
+      update: function(event, id){
+        console.log($(this).sortable("serialize"));
+      }
+    });
+    
+  });
+  
+  </script>
+</body>
+
+</html>

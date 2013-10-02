@@ -11,6 +11,7 @@
 // 夜２５時のテンションで作ったらダメですorz
 
 var FLAG_OVERFLOW = 1;
+var FLAG_INFINITE = 2;
 var ARITHMETIC_NON = 0;
 var ARITHMETIC_ADD = 1;
 var ARITHMETIC_SUB = 2;
@@ -83,6 +84,10 @@ function refreshDisplay() {
         case FLAG_OVERFLOW:
             object.innerText = "Error!";
             break;
+            
+        case FLAG_INFINITE:
+            object.innerText = "Error!";
+        	break;
 
         default:
             object.innerText = display;
@@ -133,6 +138,13 @@ function calcAnswer() {
             answer = answer * right;
             break;
         case ARITHMETIC_DIV:
+        	
+        	if(right == 0) {
+				flag = FLAG_INFINITE;
+                refreshDisplay();
+                return;
+        		
+        	}
             answer = answer / right;
             break;
         default:

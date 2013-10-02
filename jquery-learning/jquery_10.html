@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>jQuery UI 10</title>
+<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+
+<style type="text/css">
+.font36
+{
+	font-size: 36px;
+}
+</style>
+
+</head>
+
+<body>
+
+  <h1>jQuery UI が使えます</h1>
+  
+  <div id="main">
+  
+    <p>最初のパラグラフ。<a href="http://www.google.com/">LINK!</a></p>
+    
+    <ul id="menu">
+    	<li>0番</li>
+    	<li class="listitem">1番</li>
+    	<li class="listitem">2番</li>
+    	<li><a href="http://www.yahoo.co.jp/">3番</a></li>
+    </ul>
+    
+    </div>
+  
+  <script type="text/javascript">
+  
+  $(function(){
+     // クリックのたびに処理を切り替える（Ver.1.9以降用）
+     
+     var setColor = 'blue';
+     
+     $('.listitem').click( function(){
+     
+     	if(setColor == 'blue') {
+     		setColor = 'red';
+     	}
+     	else {
+     		setColor = 'blue';
+     	}
+     	$(this).css('color', setColor);
+     
+     });
+     
+  });
+  
+  </script>
+
+</body>
+
+</html>

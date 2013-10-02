@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>jQuery UI 19</title>
+<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+
+<style type="text/css">
+.font36
+{
+	font-size: 36px;
+}
+</style>
+
+</head>
+
+<body>
+
+  <h1>jQuery UI が使えます</h1>
+  
+  <div id="main">コンテンツはここに書き出す予定</div>
+  
+  <input type="button" id="kick_ajax" value="AjaxでGO!" />
+  
+  <script type="text/javascript">
+  
+  $(function(){
+    // サーバ上の別ファイルからテキストを非同期で読み込んで表示
+    // (サーバ上にあるファイルが前提なので、ローカル(file:///)では動きません。。。)
+    
+    $('#kick_ajax').click(function(){
+    
+      $('#main').load('ext_text.txt', function(){
+        alert('ファイルを読み込みました。');
+      });
+    
+    });
+    
+  });
+  
+  </script>
+
+</body>
+
+</html>
